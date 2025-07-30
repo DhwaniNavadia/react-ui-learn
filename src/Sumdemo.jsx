@@ -1,63 +1,94 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
-// Import all individual components
-import Home from './Home';
-import About from './About';
-import Contact from './Contact';
-import EventDemo from './EventDemo';
-import Counter from './Counter';
-import Sumdemo from './Sumdemo';
+// Sumdemo: A class component for performing sum of two numbers
+class Sumdemo extends React.Component {
+  constructor(props) {
+    super(props);
+    // Component state
+    this.state = {
+      txt1: '', // First number input
+      txt2: '', // Second number input
+      ans: '',  // Result message
+      error: '' // Error message if input is invalid
+    };
+    this.doSum = this.doSum.bind(this);
+  }
 
-// App is the main component that orchestrates the entire application, including routing.
-// It's a functional component that acts as the entry point for the UI.
-function App() {
+  // Function to compute the sum
+  doSum() {
+    const no1 = parseInt(this.state.txt1);
+    const no2 = parseInt(this.state.txt2);
+
+    // Input validation
+    if (isNaN(no1) || isNaN(no2)) {
+      this.setState({ error: "❌ Please enter valid numbers.", ans: '' });
+    } else {
+      const result = no1 + no2;
+      this.setState({ ans: `🧮 Sum is ${result}`, error: '' });
+    }
+  }
+
+  render() {
     return (
-        // 'Router' wraps the entire application to enable routing.
-        <Router>
-            <div className="min-h-screen bg-gradient-to-br from-gray-50 to-blue-50 p-6 sm:p-8 font-inter antialiased text-gray-800">
-                <h1 className="text-6xl md:text-7xl font-extrabold text-center mb-12 text-gray-900 drop-shadow-xl leading-tight">
-                    Welcome to My React App!
-                </h1>
+      <div className="p-8 max-w-2xl mx-auto mt-12 bg-gradient-to-br from-indigo-50 via-sky-100 to-violet-100 rounded-3xl shadow-2xl border border-indigo-300">
 
-                <br /><br /><br />
-                {/* Navigation bar with 'Link' components. */}
-                <nav className="flex flex-wrap justify-center gap-4 sm:gap-6 mb-12 p-5 bg-white rounded-3xl shadow-2xl border border-gray-100">
-                    {/* 'Link' components define navigation to different routes. */}
-                    {/* The 'to' prop specifies the path to navigate to. */}
-                    <Link to='/home' className="text-xl font-semibold text-gray-700 hover:text-blue-700 transition duration-300 ease-in-out transform hover:scale-110 px-6 py-3 rounded-full hover:bg-blue-50 shadow-md">Home</Link>|
-                    <Link to='/about' className="text-xl font-semibold text-gray-700 hover:text-purple-700 transition duration-300 ease-in-out transform hover:scale-110 px-6 py-3 rounded-full hover:bg-purple-50 shadow-md">About</Link>|
-                    <Link to='/contact' className="text-xl font-semibold text-gray-700 hover:text-green-700 transition duration-300 ease-in-out transform hover:scale-110 px-6 py-3 rounded-full hover:bg-green-50 shadow-md">Contact</Link>|
-                    <Link to='/eventdemo' className="text-xl font-semibold text-gray-700 hover:text-orange-700 transition duration-300 ease-in-out transform hover:scale-110 px-6 py-3 rounded-full hover:bg-orange-50 shadow-md">EventDemo</Link>|
-                    <Link to='/counter' className="text-xl font-semibold text-gray-700 hover:text-teal-700 transition duration-300 ease-in-out transform hover:scale-110 px-6 py-3 rounded-full hover:bg-teal-50 shadow-md">Counter</Link>|
-                    <Link to='/sumdemo' className="text-xl font-semibold text-gray-700 hover:text-indigo-700 transition duration-300 ease-in-out transform hover:scale-110 px-6 py-3 rounded-full hover:bg-indigo-50 shadow-md">Sum</Link>|
-                </nav>
+        {/* Title */}
+        <h1 className="text-4xl font-extrabold text-center text-indigo-700 mb-10 tracking-wide">
+          ➕ Sum Calculator
+        </h1>
 
-                <div className="max-w-5xl mx-auto space-y-10 p-4">
-                    {/* 'Routes' component: It looks through all its children 'Route' elements and renders the first one whose path matches the current URL. */}
-                    <Routes>
-                        {/* 'Route' component: Defines a specific path and the element to render when that path is matched. */}
-                        {/* The 'path' prop specifies the URL path. */}
-                        {/* The 'element' prop specifies the React component to render. */}
+        {/* Input Fields */}
+        <div className="space-y-6 mb-10">
+          <label className="block text-lg font-semibold text-gray-800">
+            Number 1:
+            <input
+              type="text"
+              value={this.state.txt1}
+              onChange={(e) => this.setState({ txt1: e.target.value })}
+              placeholder="Enter first number"
+              className="mt-2 w-full sm:w-1/2 block shadow-inner border border-gray-300 rounded-xl py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+            />
+          </label>
 
-                        <Route path='/' element={<Home />} /> {/* Default route for the root path. */}
-                        <Route path='/home' element={<Home />} /> {/* Route for /home, renders Home component. */}
-                        <Route path='/about' element={<About />} /> {/* Route for /about, renders About component. */}
-                        <Route path='/contact' element={<Contact />} /> {/* Route for /contact, renders Contact component. */}
-                        <Route path='/eventdemo' element={<EventDemo />} /> {/* Route for /eventdemo, renders EventDemo component. */}
-                        <Route path='/counter' element={<Counter />} /> {/* Route for /counter, renders Counter component. */}
-                        <Route path='/sumdemo' element={<Sumdemo />} /> {/* Route for /sumdemo, renders Sumdemo component. */}
-                        {/* Routes with dynamic parts (e.g., /cake/:city) */}
-                        <Route path='/cake/ahmedabad' element={<h1 className="text-3xl font-bold text-red-700 text-center">Ahmedabad Cake</h1>} />
-                        <Route path='/cake/surat' element={<h1 className="text-3xl font-bold text-red-700 text-center">Surat Cake</h1>} />
-                        {/* Catch-all route: The '*' wildcard matches any path that hasn't been matched by previous routes. */}
-                        {/* This is commonly used for 404 "Not Found" pages. */}
-                        <Route path='*' element={<h1 className="text-3xl font-bold text-gray-700 text-center">404 File Not Found</h1>} />
-                    </Routes>
-                </div>
-            </div>
-        </Router>
+          <label className="block text-lg font-semibold text-gray-800">
+            Number 2:
+            <input
+              type="text"
+              value={this.state.txt2}
+              onChange={(e) => this.setState({ txt2: e.target.value })}
+              placeholder="Enter second number"
+              className="mt-2 w-full sm:w-1/2 block shadow-inner border border-gray-300 rounded-xl py-3 px-4 text-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+            />
+          </label>
+        </div>
+
+        {/* Calculate Button */}
+        <div className="text-center">
+          <button
+            type="button"
+            onClick={this.doSum}
+            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold text-lg py-3 px-8 rounded-full shadow-xl transform transition hover:scale-105 focus:outline-none focus:ring-2 focus:ring-purple-400"
+          >
+            🚀 Calculate Sum
+          </button>
+        </div>
+
+        {/* Output Section */}
+        {this.state.ans && (
+          <p className="mt-10 p-5 bg-blue-100 text-blue-800 text-center text-lg font-semibold border border-blue-300 rounded-xl shadow-sm">
+            {this.state.ans}
+          </p>
+        )}
+
+        {/* Error Handling */}
+        {this.state.error && (
+          <p className="mt-6 p-4 bg-red-100 text-red-700 text-center text-lg font-semibold border border-red-300 rounded-xl shadow-sm">
+            {this.state.error}
+          </p>
+        )}
+      </div>
     );
+  }
 }
 
-export default App; // Exports the main App component, making it the entry point for the React application.
+export default Sumdemo;
