@@ -1,12 +1,50 @@
-# React + Vite
+# 🧠 React UI Learn
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A clean and modular React-based web application created for learning and experimenting with core React concepts like components, props, state, event handling, and styling. This project is built using [Vite](https://vitejs.dev/) for fast development and modern tooling.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- 📦 Built with **React** using **Functional** and **Class** components.
+- 🎯 Explores core topics:
+  - Props and State
+  - Event Handling
+  - Conditional Rendering
+  - Component Composition
+- 🎨 Styled using Tailwind CSS classes.
+- ⚡ Powered by **Vite** for ultra-fast builds and HMR.
+- ✅ Linting with ESLint.
+- 📁 Modular and scalable folder structure.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/DhwaniNavadia/react-ui-learn.git
+cd react-ui-learn
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Run the Development Server
+```bash
+npm run dev
+```
+
+---
+
+### ✅ What to do next:
+- Copy this `README.md` into your project root.
+- Run:
+  ```bash
+  git add README.md
+  git commit -m "Added well-structured README"
+  git push
+
